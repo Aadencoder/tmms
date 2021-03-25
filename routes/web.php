@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// -------------Teacher Details Controller Routes ------------------------// 
+Route::get('/', 'TeacherDetailsController@index')->name('home');
+Route::post('teacher/create', 'TeacherDetailsController@create')->name('teacherCreate');
