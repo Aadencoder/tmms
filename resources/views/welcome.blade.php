@@ -13,6 +13,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <script src="{{asset('js/main.js')}}"></script>
 
 </head>
@@ -96,8 +97,9 @@
           <span aria-hidden="true">&times;</span>
       </button>
       <div class="signup-form"> 
-        <form action="/examples/actions/confirmation.php" method="post">
-            <h3>Create Teacher Module</h3>
+        <form action="{{URL::to('/')}}" method="post" enctype="multipart/form-data" id="addTeacherModuleForm" novalidate="novalidate">
+            {{ csrf_field() }}
+             <h3>Create Teacher Module</h3>
             <p class="lead">All fields are compulsary</p>
             <div class="form-group">
                 <div class="input-group">
@@ -126,9 +128,9 @@
             <div class="form-group">
                 <div class="input-group">
                     <label for="nationality"><i class="fa fa-globe"></i></label>
-                    <select class="form-control" id="nationality">
+                    <select class="form-control" id="nationality" name="nationality_id">
                       <option value="">Select Nationality</option>
-                      <option>Nepal</option>
+                      <option value="1">Nepal</option>
                       <option>Indian</option>
                       <option>United Kingdom</option>
                       <option>United States</option>
@@ -144,9 +146,9 @@
         <div class="form-group">
            <div class="input-group">
                <label for="faculties"><i class="fa fa-bank"></i></label>
-               <select class="form-control" id="faculties">
+               <select class="form-control" id="faculties" name="faculty_id">
                 <option value="">Select Faculty</option>
-                <option>Science & Technology</option>
+                <option value="1">Science & Technology</option>
                 <option>Management</option>
                 <option>Arts</option>
                 <option>Education</option>
@@ -157,9 +159,9 @@
     <div class="form-group">
        <div class="input-group">
            <label for="facultyModules"><i class="fa fa-archive"></i></label>
-           <select class="form-control" id="facultyModules">
+           <select class="form-control" id="facultyModules" name="faculty_module_id">
             <option value="">Select Faculty Module</option>
-            <option>Computer Engineering</option>
+            <option value="1">Computer Engineering</option>
             <option>Civil Engineering</option>
             <option>BBS</option>
             <option>BBA</option>
@@ -168,6 +170,21 @@
             <option>LLB</option>
         </select>
     </div>
+</div>
+  <div class="form-group">
+        <label for="gender">Gender</label>
+    <div class="input-group">
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="gender_id" value="1">Male
+          </label>
+        </div>
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="gender_id" value="2">Female
+          </label>
+        </div>
+        </div>
 </div>
 <div class="form-group">
     <button type="submit" class="btn btn-primary btn-block btn-lg">Submit</button>
