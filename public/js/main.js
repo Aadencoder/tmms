@@ -27,7 +27,10 @@
                         minlength: "Your email must be at least 6 characters long"
                     },
                   phone: "Please enter your phone number",
-                  gender: "This field is required"
+                  nationality_id: "Please select your nationality",
+                  faculty_id: "Please select your faculty",
+                  faculty_module_id: "Please select your faculty module",
+                  gender_id: "This field is required"
                 },
                  errorPlacement: function(error, element) 
         {
@@ -46,3 +49,4 @@
                 
             });
     });
+
