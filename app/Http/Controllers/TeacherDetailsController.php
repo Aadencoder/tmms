@@ -46,14 +46,14 @@ class TeacherDetailsController extends Controller
         //form validation
         $rules = array(
             'lecturer_name' => 'required',
-            'gender_id' => 'required',
+            'gender_id' => 'required|numeric',
             'phone' => 'required',
-            'email' => 'required',
-            'address' => 'required',
-            'nationality_id' => 'required',
+            'email' => 'required|email',
+            'address' => 'required|max:150',
+            'nationality_id' => 'required|numeric',
             'dob' => 'required',
-            'faculty_id' => 'required',
-            'faculty_module_id' => 'required',
+            'faculty_id' => 'required|numeric',
+            'faculty_module_id' => 'required|numeric',
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -62,7 +62,6 @@ class TeacherDetailsController extends Controller
             ->withErrors($validator)
             ->withInput();
         }
-        // echo $request->phone; die();
         // add to DB
             $teacher = new teacherDetails();
             $teacher->lecturer_name=$request->lecturer_name;
@@ -97,19 +96,18 @@ class TeacherDetailsController extends Controller
  public function export($type = "CSV")
   {
         $data = TeacherDetails::get()->toArray();
-        // foreach ($data as $key => $dat) {
-        //    echo  $dat['lecturer_name']; die();
-        // }
+
          foreach ($data as $key => $dat) {
+            
              $gender = Genders::where('id', $dat['gender_id'])->value('type'); 
              $faculty = Faculties::where('id', $dat['faculty_id'])->value('name'); 
              $facultyModule = FacultyModules::where('id', $dat['faculty_module_id'])->value('name'); 
              $nationality = Nationalities::where('id', $dat['nationality_id'])->value('name'); 
+
+             // Reseting array key name
             $data[$key]['gender_id']= $gender;
             $data[$key]['gender'] = $data[$key]['gender_id'];
             unset($data[$key]['gender_id']);
-
-
 
             $data[$key]['nationality_id']= $nationality;
             $data[$key]['nationality'] = $data[$key]['nationality_id'];
@@ -124,7 +122,7 @@ class TeacherDetailsController extends Controller
             unset($data[$key]['faculty_module_id']);
 
         }
-        // print_r($data); die();
+
         return Excel::create('teachers_details', function($excel) use ($data) {
             $excel->sheet('mySheet', function($sheet) use ($data)
             {

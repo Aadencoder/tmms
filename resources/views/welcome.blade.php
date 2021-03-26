@@ -1,24 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>TMMS | Teacher Module Management System</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="{{asset('css/style.css')}}" rel="stylesheet" />
-
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="{{asset('js/main.js')}}"></script>
-
-</head>
-<body>
+@extends('main')
+  @section('content')
     <div class="container-xl">
         <div class="table-responsive">
             <div class="table-wrapper">
@@ -85,7 +66,7 @@
                     <li class="page-item"><a href="#" class="page-link">Next</a></li>
                 </ul>
             </div> --}}
-            {{ $teachers->links() }}
+            {{ $teachers->links('pagination.default') }}
 
         </div>
     </div>
@@ -102,7 +83,8 @@
           <span aria-hidden="true">&times;</span>
       </button>
       <div class="signup-form"> 
-        <form action="{{URL::to('/')}}/teacher/create" method="post" enctype="multipart/form-data" id="addTeacherModuleForm" novalidate="novalidate">
+        <form action="{{URL::to('/')}}/teacher/create" method="post" enctype="multipart/form-data" id="addTeacherModuleForm" >
+            {{-- novalidate="novalidate" --}}
             {{ csrf_field() }}
             <h3>Create Teacher Module</h3>
             <p class="lead">All fields are compulsary</p>
@@ -133,7 +115,7 @@
             <div class="form-group">
                 <div class="input-group">
                     <label for="nationality"><i class="fa fa-globe"></i></label>
-                    <select class="form-control" id="nationality" name="nationality_id">
+                    <select class="form-control" id="nationality" name="nationality_id" required="required">
                       <option value="">Select Nationality</option>
                       @foreach($nationalities as $nationality)
                       <option value="{{$nationality->id}}">{{$nationality->name}}</option>
@@ -149,7 +131,7 @@
         <div class="form-group">
            <div class="input-group">
                <label for="faculties"><i class="fa fa-bank"></i></label>
-               <select class="form-control" id="faculties" name="faculty_id">
+               <select class="form-control" id="faculties" name="faculty_id" required="required">
                 <option value="">Select Faculty</option>
                 @foreach($faculties as $faculty)
                 <option value="{{$faculty->id}}">{{$faculty->name}}</option>
@@ -162,11 +144,7 @@
     <div class="form-group">
        <div class="input-group">
            <label for="facultyModules"><i class="fa fa-archive"></i></label>
-           <select class="form-control" id="facultyModules" name="faculty_module_id">
-        {{--     <option value="">Select Faculty Module</option>
-            @foreach($faculty_modules as $faculty_module)
-            <option value="{{$faculty_module->id}}">{{$faculty_module->name}}</option>
-            @endforeach --}}
+           <select class="form-control" id="facultyModules" name="faculty_module_id" required="required">
         </select>
     </div>
 </div>
@@ -176,7 +154,7 @@
         @foreach($genders as $gender)
         <div class="form-check-inline">
           <label class="form-check-label">
-            <input type="radio" class="form-check-input" name="gender_id" value="{{$gender->id}}">{{$gender->type}}
+            <input type="radio" class="form-check-input" name="gender_id" value="{{$gender->id}}" required="required">{{$gender->type}}
         </label>
     </div>
     @endforeach
@@ -192,36 +170,4 @@
 </div>
 </div>
 </div>
-
-<script type="text/javascript">
-        $(function(){
-    $('#faculties').change(function(){
-       $("#facultyModules option").remove();
-       var id = $(this).val();
-       console.log(id);
-       $.ajax({
-          url : "{{URL::route('loadFacultyModules')}}",
-          data: {
-            "_token": "{{ csrf_token() }}",
-            "id": id
-            },
-          type: 'post',
-          dataType: 'json',
-          success: function( result )
-          {
-               $.each( result, function(k, v) {
-                    $('#facultyModules').append($('<option>', {value:k, text:v}));
-               });
-          },
-          error: function()
-         {
-             //handle errors
-             alert('error...');
-         }
-       });
-    });
-});
-</script>
-
-</body>
-</html>
+  @endsection
