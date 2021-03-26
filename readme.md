@@ -12,7 +12,7 @@ TMMS is a Teacher Module Management System made with laravel and bootstrap.
 <p>
   <a href="https://i.ibb.co/X2KjCvY/table.png"><img src="https://i.ibb.co/X2KjCvY/table.png" target="_blank" alt="Capture" border="0" /></a>
   
-  <a href="https://i.ibb.co/qF8fDZ4/create.png"><img src="https://i.ibb.co/X2KjCvY/table.png" target="_blank" alt="Screenshot-23"
+  <a href="https://i.ibb.co/qF8fDZ4/create.png"><img src="https://i.ibb.co/qF8fDZ4/create.png" target="_blank" alt="Screenshot-23"
       border="0" /></a>
 
  
