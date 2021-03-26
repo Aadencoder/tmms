@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\TeacherDetails;
 use App\Faculties;
-use App\Nationalities;
 use App\FacultyModules;
 use App\Genders;
+use App\Nationalities;
+use App\TeacherDetails;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class TeacherDetailsController extends Controller
@@ -92,6 +93,45 @@ class TeacherDetailsController extends Controller
       }
       return $output;
 }
+
+ public function export($type = "CSV")
+  {
+        $data = TeacherDetails::get()->toArray();
+        // foreach ($data as $key => $dat) {
+        //    echo  $dat['lecturer_name']; die();
+        // }
+         foreach ($data as $key => $dat) {
+             $gender = Genders::where('id', $dat['gender_id'])->value('type'); 
+             $faculty = Faculties::where('id', $dat['faculty_id'])->value('name'); 
+             $facultyModule = FacultyModules::where('id', $dat['faculty_module_id'])->value('name'); 
+             $nationality = Nationalities::where('id', $dat['nationality_id'])->value('name'); 
+            $data[$key]['gender_id']= $gender;
+            $data[$key]['gender'] = $data[$key]['gender_id'];
+            unset($data[$key]['gender_id']);
+
+
+
+            $data[$key]['nationality_id']= $nationality;
+            $data[$key]['nationality'] = $data[$key]['nationality_id'];
+            unset($data[$key]['nationality_id']);
+
+            $data[$key]['faculty_id']= $faculty;
+            $data[$key]['faculty'] = $data[$key]['faculty_id'];
+            unset($data[$key]['faculty_id']);
+            
+            $data[$key]['faculty_module_id']= $facultyModule;
+            $data[$key]['faculty_module'] = $data[$key]['faculty_module_id'];
+            unset($data[$key]['faculty_module_id']);
+
+        }
+        // print_r($data); die();
+        return Excel::create('teachers_details', function($excel) use ($data) {
+            $excel->sheet('mySheet', function($sheet) use ($data)
+            {
+                $sheet->fromArray($data);
+            });
+        })->download($type);
+  }
 
     /**
      * Store a newly created resource in storage.

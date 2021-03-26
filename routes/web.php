@@ -19,3 +19,4 @@
 Route::get('/', 'TeacherDetailsController@index')->name('home');
 Route::post('teacher/create', 'TeacherDetailsController@create')->name('teacherCreate');
 Route::post('get/faculty/module', 'TeacherDetailsController@facultyModule')->name('loadFacultyModules');
+Route::get('teacher/export', 'TeacherDetailsController@export')->name('export');

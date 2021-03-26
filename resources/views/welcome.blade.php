@@ -28,7 +28,7 @@
                             <h2>Teacher Module <b>Management</b></h2>
                         </div>
                         <div class="col-sm-7">
-                            <a href="#" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal"><i class="material-icons">&#xE24D;</i> <span>Export to Excel</span></a>   
+                            <a href="{{URL::to('/')}}/teacher/export" class="btn btn-secondary"><i class="material-icons">&#xE24D;</i> <span>Export to Excel</span></a>   
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTeacherModule">
                               <i class="material-icons">&#xE147;</i>Add Teacher Module
                           </button>
