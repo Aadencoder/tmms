@@ -15,6 +15,10 @@ TMMS is a Teacher Module Management System made with laravel and bootstrap.
   <a href="https://i.ibb.co/qF8fDZ4/create.png"><img src="https://i.ibb.co/qF8fDZ4/create.png" target="_blank" alt="Screenshot-23"
       border="0" /></a>
 
+
+  
+  <a href="https://i.ibb.co/smFmBLd/csv.png"><img src="https://i.ibb.co/smFmBLd/csv.png" target="_blank" alt="Screenshot-23"
+      border="0" /></a>
  
 </p>
 
@@ -52,7 +56,6 @@ TMMS is a Teacher Module Management System made with laravel and bootstrap.
 
 ## 4. Migrate Database
 >~php artisan migrate:fresh <br />
->~php artisan db:seed <br />
 <br />
 
 ## 5. Serve application
