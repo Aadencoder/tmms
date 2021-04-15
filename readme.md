@@ -60,7 +60,7 @@
     - `Exit;`
 
  * Finally, exit the container:
-    -`exit`
+        -`exit`
 
 
  * First, test the connection to MySQL by running the Laravel artisan migrate command, which creates a migrations table in the database from inside the container:
