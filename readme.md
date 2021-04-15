@@ -47,7 +47,7 @@
 * You will be prompted for the password you set for the MySQL root account during installation in your docker-compose file.
 
 * Run the show databases command to check for existing databases:
-    -`mysql>show databases;`
+    - `mysql>show databases;`
 
 * Next, create the user account that will be allowed to access this database
 
