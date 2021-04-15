@@ -11,11 +11,11 @@
 
 
     > DB_CONNECTION=mysql<br>
-    > DB_HOST=127.0.0.1<br>
+    > DB_HOST=db<br>
     > DB_PORT=3306<br>
     > DB_DATABASE=mob<br>
-    > DB_USERNAME=root<br>
-    > DB_PASSWORD=<br>
+    > DB_USERNAME=mobtrixapp_dev<br>
+    > DB_PASSWORD=secret<br>
 
 * Start all of the containers, create the volumes, and set up and connect the networks:
 
